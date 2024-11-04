@@ -18,3 +18,34 @@ fetch(apiURL)
     document.getElementById('product-menu').innerHTML = `<p class="error">Failed to display products. Please retry.</p>`;
     console.error('Error fetching products:', error); // At least we know what happened
   });
+
+//Task 3 Display Product Details Dynamically
+// Function to handle all the product display stuff
+function displayProducts(products) {
+    const productContainer = document.getElementById('product-menu'); // Where we'll put the products
+    productContainer.innerHTML = ''; // Clear it just in case there's old stuff
+  
+    products.forEach(product => {
+      // Let's grab all the details we need
+      const { company, name, price } = product.fields;
+      const { url: imageUrl } = product.fields.image[0]; // Image is a little nested, but no worries
+  
+      // Creating a new product card element
+      const productCard = document.createElement('div');
+      productCard.classList.add('product-card'); // Giving it a class to style later
+  
+      // Putting everything inside the card
+      productCard.innerHTML = `
+        <img src="${imageUrl}" alt="${name}" class="product-image" />
+        <h2 class="product-name">${name}</h2>
+        <p class="product-company">by ${company}</p>
+        <p class="product-price">$${(price / 100).toFixed(2)}</p>
+      `;
+  
+      // And finally, we slap it on the page
+      productContainer.appendChild(productCard);
+    });
+  }
+
+  
+  
