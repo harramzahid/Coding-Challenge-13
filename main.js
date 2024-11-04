@@ -13,11 +13,7 @@ fetch(apiURL)
   .then(data => {
     displayProducts(data); // Now we show the stuff on the page
   })
-  .catch(error => {
-    // If things go south, show an error message
-    document.getElementById('product-menu').innerHTML = `<p class="error">Failed to display products. Please retry.</p>`;
-    console.error('Error fetching products:', error); // At least we know what happened
-  });
+  
 
 //Task 3 Display Product Details Dynamically
 // Function to handle all the product display stuff
@@ -47,5 +43,11 @@ function displayProducts(products) {
     });
   }
 
-  
+// Task 4 Handle Errors Gracefully
+ .catch(error => {
+    // If things go south, show an error message
+    document.getElementById('product-menu').innerHTML = `<p class="error">Failed to load products. Please try again later.</p>`;
+    console.error('Error fetching products:', error); // At least we know what happened
+  });
+
   
